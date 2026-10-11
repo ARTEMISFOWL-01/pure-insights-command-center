@@ -1,0 +1,41 @@
+[
+  {
+    "defect_id": "DQ-001",
+    "defect_type": "Orphaned Records",
+    "column": "owner_email",
+    "records_affected": 245,
+    "severity": "HIGH",
+    "resolution": "Added 'is_orphaned' flag column; replaced NaN and 'ORPHANED_REPORT' with 'UNASSIGNED'",
+    "business_impact": "Reports without owners cannot receive refresh failure alerts or cost attribution"
+  },
+  {
+    "defect_id": "DQ-002",
+    "defect_type": "Negative Credit Values",
+    "column": "snowflake_credits_consumed",
+    "records_affected": 24,
+    "severity": "MEDIUM",
+    "resolution": "Flagged anomalies with 'has_credit_anomaly'; zeroed out negative values",
+    "business_impact": "Negative credits distort cost allocation calculations and unit economics"
+  },
+  {
+    "defect_id": "DQ-003",
+    "defect_type": "Extreme Latency Spikes",
+    "column": "avg_load_time_sec",
+    "records_affected": 1490,
+    "severity": "HIGH",
+    "resolution": "Added 'latency_tier' (FAST/NORMAL/SLOW/CRITICAL/EXTREME) and 'needs_alert' flag",
+    "business_impact": "Reports loading >15s degrade user experience; >45s indicates system failure requiring immediate intervention"
+  },
+  {
+    "defect_id": "DQ-004",
+    "defect_type": "User/Cost Discrepancy",
+    "columns": [
+      "monthly_active_views",
+      "aws_hosting_cost_usd"
+    ],
+    "records_affected": 126,
+    "severity": "MEDIUM",
+    "resolution": "Added 'cost_per_view' metric and 'is_cost_inefficient' flag for optimization targeting",
+    "business_impact": "Compute resources allocated regardless of usage \u2014 optimization could reduce AWS spend by 15-25%"
+  }
+]
